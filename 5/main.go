@@ -3,20 +3,30 @@ package main
 import "fmt"
 
 func longestPalindrome(s string) string {
-	var dp = make([]int, len(s))
-	dp[0] = 1
-	for i := 1; i < len(s); i++ {
-		if i-dp[i-1]-1 >= 0 && s[i-dp[i-1]-1] == s[i] {
-			dp[i] = dp[i-1] + 2
-		} else if dp[i-1] == 1 && s[i] == s[i-1] {
-			dp[i] = dp[i-1] + 1
-		} else {
-			dp[i] = 1
+	var res string
+	var resLen int
+	for i := 0; i < len(s); i++ {
+		l, r := i, i
+		for l >= 0 && r < len(s) && s[l] == s[r] {
+			if r-l+1 > resLen {
+				res = s[l : r+1]
+				resLen = r - l + 1
+			}
+			l--
+			r++
+		}
+		l, r = i, i+1
+		for l >= 0 && r < len(s) && s[l] == s[r] {
+			if r-l+1 > resLen {
+				res = s[l : r+1]
+				resLen = r - l + 1
+			}
+			l--
+			r++
 		}
 	}
-	fmt.Println(dp)
 
-	return ""
+	return res
 }
 
 func main() {
