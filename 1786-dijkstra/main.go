@@ -67,12 +67,18 @@ func countRestrictedPaths(n int, edges [][]int) int {
 		if i != source {
 			dist[i] = math.MaxInt
 		} else {
+			dist[i] = 0
 			heap.Push(h, []int{source, 0})
 		}
 	}
 
 	for h.Len() > 0 {
-		u := h.Pop().([]int)[0]
+		top := h.Pop().([]int)
+		u := top[0]
+		d := top[1]
+		if d != dist[u] {
+			continue
+		}
 		for _, edge := range adjV[u] {
 			v := edge[0]
 			w := edge[1]
