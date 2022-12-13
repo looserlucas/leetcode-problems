@@ -3,6 +3,7 @@ package main
 
 import (
 	"container/heap"
+	"fmt"
 )
 
 // An IntHeap is a min-heap of ints.
@@ -34,7 +35,6 @@ func CreateHeap() *IntHeap {
 
 // This example inserts several ints into an IntHeap, checks the minimum,
 // and removes them in order of priority.
-/*
 func main() {
 	h := &IntHeap{2, 1, 5}
 	heap.Init(h)
@@ -44,4 +44,3 @@ func main() {
 		fmt.Printf("%d ", heap.Pop(h))
 	}
 }
-*/
