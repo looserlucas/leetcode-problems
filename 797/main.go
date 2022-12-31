@@ -5,24 +5,26 @@ import "fmt"
 var result [][]int
 
 func allPathsSourceTarget(graph [][]int) [][]int {
-	var nowArr = []int{0}
+	var nowArr = []int{}
 	result = nil
 	getToTarget(graph, 0, nowArr)
 	return result
 }
 
 func getToTarget(graph [][]int, now int, nowArr []int) {
+	nowArr = append(nowArr, now)
 	if now == len(graph)-1 {
-		result = append(result, nowArr)
+		newArr := make([]int, len(nowArr))
+		copy(newArr, nowArr)
+		result = append(result, newArr)
+		nowArr = nowArr[:len(nowArr)-1]
 		return
 	}
 
 	for _, v := range graph[now] {
-		var newArr = make([]int, len(nowArr))
-		copy(newArr, nowArr)
-		newArr = append(newArr, v)
-		getToTarget(graph, v, newArr)
+		getToTarget(graph, v, nowArr)
 	}
+	nowArr = nowArr[:len(nowArr)-1]
 }
 
 func main() {
